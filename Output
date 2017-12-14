@@ -1,7 +1,4 @@
-Test for RTriangleProvider.class has started..
-Triangle with coordinates (4, 1, 1, 4, 5, 2) is rectangular.
-Exception in thread "main" java.lang.AssertionError: 
-Triangle with coordinates (1, 2, 6, 2, 4, 1) is NOT rectangular !!
-	at org.junit.Assert.fail(Assert.java:88)
-	at org.junit.Assert.assertTrue(Assert.java:41)
-	at org.junit.Assert.assertNotNull(Assert.java:712)
+run tests: 1
+failed tests: 1
+ignored tests: 0
+success: false
