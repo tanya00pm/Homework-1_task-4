@@ -1,47 +1,52 @@
 package ru.levelup.tatiana_nesterova.qa.homework1.task4;
 import static org.junit.Assert.*;
+import org.junit.Test;
+import org.junit.runner.JUnitCore;
+import org.junit.runner.Result;
+
 
 public class RTriangleProviderTest {
     // class for unit test
 
     private RTriangleProvider triangle;
 
-    //BeforeClass
-    public static void beforeClass() {
-        System.out.println("Test for RTriangleProvider.class has started..");
+    @org.junit.Before
+    public void init() {
+        triangle = new RTriangleProvider();
     }
 
-    //AfterClass
-    public  static void afterClass() {
-        System.out.println("Test for RTriangleProvider.class has finished.");
+    @org.junit.Before
+    public void tearDown() { triangle = null; }
+
+    @org.junit.Test
+    public void testTriangleIsRectangular() {
+
+        // this test should pass
+       triangle.setCoordinates(4, 1, 1, 4, 5, 2);
+
+       assertNotNull(RTriangleProvider.getRTriangle(triangle.getApexX1(), triangle.getApexY1(),
+                       triangle.getApexX2(), triangle.getApexY2(), triangle.getApexX3(), triangle.getApexY3()));
+
+       // this test should not pass
+       triangle.setCoordinates(1, 2, 6, 2, 4, 1);
+
+       assertNotNull(RTriangleProvider.getRTriangle(triangle.getApexX1(), triangle.getApexY1(),
+               triangle.getApexX2(), triangle.getApexY2(), triangle.getApexX3(), triangle.getApexY3()));
+   }
+
+    @org.junit.Ignore
+    @Test
+    public void todo() {
+        System.out.println("Test ignored part");
     }
 
-    //Before
-    public void initTest(int x1, int y1, int x2, int y2, int x3, int y3) {
-        triangle = new RTriangleProvider(x1, y1, x2, y2, x3, y3);
-    }
+    public static void main(String[] args) throws Exception {
 
-    //After
-    public void afterTest() {
-        triangle = null;
-    }
-
-    public void test_Triangle_is_Rectangular() {
-        //Test if triangle is rectangular and print the results
-
-        assertNotNull("\nTriangle with coordinates (" +
-                            triangle.getApexX1() + ", " + triangle.getApexY1() + ", " +
-                            triangle.getApexX2() + ", " + triangle.getApexY2() + ", " +
-                            triangle.getApexX3() + ", " + triangle.getApexY3() +
-                            ") is NOT rectangular !!",
-                    RTriangleProvider.getRTriangle(triangle.getApexX1(), triangle.getApexY1(),
-                            triangle.getApexX2(), triangle.getApexY2(), triangle.getApexX3(), triangle.getApexY3()));
-
-
-        System.out.println("Triangle with coordinates ("+
-                triangle.getApexX1() + ", " + triangle.getApexY1() + ", " +
-                triangle.getApexX2() + ", " + triangle.getApexY2() + ", " +
-                triangle.getApexX3() + ", " + triangle.getApexY3() +
-                ") is rectangular.");
+        JUnitCore runner = new JUnitCore();
+        Result result = runner.run(RTriangleProvider.class);
+        System.out.println("run tests: " + result.getRunCount());
+        System.out.println("failed tests: " + result.getFailureCount());
+        System.out.println("ignored tests: " + result.getIgnoreCount());
+        System.out.println("success: " + result.wasSuccessful());
     }
 }
